@@ -11,7 +11,7 @@
 		
 		<script src= "../../three.js"></script>
 		<script>
-			// Our Javascript will go here.
+			
 			const scene = new THREE.Scene();
 			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
@@ -29,11 +29,11 @@
 				requestAnimationFrame(animate);
 				
 				document.onkeydown = checkKey;
-				//cube.rotation.x += 0.01;
+				
 				renderer.render(scene, camera);
 			};
 			function checkKey(e){
-				console.log("beh");
+				
 				e = e || window.event; 
 				if(e.keyCode == '37'){
 					cube.rotation.y += 1;
@@ -41,20 +41,6 @@
 					cube.rotation.y -= 1; 
 				}
 			}
-			
-			
-
-			/*function keyPressed(){
-				console.log("press");
-					if(keyCode === LEFT_ARROW){
-						cube.rotation.x -= 0.01; 
-					}else if(keyCode === RIGHT_ARROW){
-						cube.rotation.y += 0.01; 
-					}
-			}*/
-
-
-
 			animate();
 		</script>
 	</body>
