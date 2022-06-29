@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		
-		<script src= "three.js"></script>
+		<script src= "../../three.js"></script>
 		<script>
 			// Our Javascript will go here.
 			const scene = new THREE.Scene();
@@ -27,9 +27,33 @@
 
 			function animate(){
 				requestAnimationFrame(animate);
+				
+				document.onkeydown = checkKey;
 				//cube.rotation.x += 0.01;
 				renderer.render(scene, camera);
 			};
+			function checkKey(e){
+				console.log("beh");
+				e = e || window.event; 
+				if(e.keyCode == '37'){
+					cube.rotation.y += 1;
+				}else if(e.keyCode == '39'){
+					cube.rotation.y -= 1; 
+				}
+			}
+			
+			
+
+			/*function keyPressed(){
+				console.log("press");
+					if(keyCode === LEFT_ARROW){
+						cube.rotation.x -= 0.01; 
+					}else if(keyCode === RIGHT_ARROW){
+						cube.rotation.y += 0.01; 
+					}
+			}*/
+
+
 
 			animate();
 		</script>
