@@ -37,13 +37,40 @@
 				myEvent = "";
 				renderer.render(scene, camera);
 			};
+			let currentState; 
 			function updateState(e){
-				if (e == "" && currentState == "left") {
+				//console.log(e);
+				console.log(currentState);
+				if(e == ""){
+					if(currentState == "left"){
+						cube.rotation.y -= .01; 
+					}else if(currentState == "right"){
+						cube.rotation.y += .01; 
+					}
+				}else if(e instanceof KeyboardEvent){
+					if(e.keyCode == '37'){
+						currentState = "left";
+						cube.rotation.y -= .01; 
+					}else if(e.keyCode == '39'){
+						currentState = "right";
+						cube.rotation.y += .01;
+					}
 
+				}
+				/*
+				
+				if (e == "" && currentState == "left") {
+					cube.rotation.y -= 1; 
 				}else if(e == "" && currentState == "right"){
-					
+					cube.rotation.y += 1; 
 				}else if(e == "" && currentState == ""){
-					
+
+				}else if(e.keyCode = "37"){
+					currentState = "left";
+					cube.rotation.y -= 1; 
+				}else if(e.keyCode = "39"){
+					currentState = "right";
+					cube.rotation.y += 1;
 				}
 				
 				/*
