@@ -38,24 +38,41 @@
 				renderer.render(scene, camera);
 			};
 			let currentState; 
+
+			function press37(e){
+				e.keyCode == '37';
+		
+			}
+			function press39(e){
+				return e.keyCode == '39';
+			}
+			function rotateY(c, n){
+				c.rotation.y += n; 
+				return c; 
+			}
+
 			function updateState(e){
 				//console.log(e);
 				console.log(currentState);
 				console.log(cube.rotation.y);
 				if(e instanceof KeyboardEvent){
-					if(e.keyCode == '37'){
+					if(press37(e)){
 						currentState = "left";
-						cube.rotation.y -= .01; 
-					}else if(e.keyCode == '39'){
+						//cube.rotation.y -= .01; 
+						cube = rotateY(cube, -.01);
+					}else if(press39(e)){
 						currentState = "right";
-						cube.rotation.y += .01;
+						//cube.rotation.y += .01;
+						cube = rotateY(cube, .01);
 					}
 
 				}else if(e == ""){
 					if(currentState == "left"){
-						cube.rotation.y -= .01; 
+						//cube.rotation.y -= .01; 
+						cube = rotateY(cube, -.01);
 					}else if(currentState == "right"){
-						cube.rotation.y += .01; 
+						//cube.rotation.y += .01; 
+						cube = rotateY(cube, -.01);
 					}
 				}
 				/*
