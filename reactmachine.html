@@ -25,21 +25,33 @@
 			scene.add( cube );
 			camera.position.z = 5;
 
+			var myEvent;
+			document.onkeydown = function (e) {
+				myEvent =  e || window.event; 
+			};
+
 			function animate(){
 				requestAnimationFrame(animate);
 				
-				document.onkeydown = checkKey;
-				
+				updateState(myEvent);
+				myEvent = "";
 				renderer.render(scene, camera);
 			};
-			function checkKey(e){
+			function updateState(e){
+				if (e == "" && currentState == "left") {
+
+				}else if(e == "" && currentState == "right"){
+					
+				}else if(e == "" && currentState == ""){
+					
+				}
 				
-				e = e || window.event; 
+				/*
 				if(e.keyCode == '37'){
 					cube.rotation.y += 1;
 				}else if(e.keyCode == '39'){
 					cube.rotation.y -= 1; 
-				}
+				}*/
 			}
 			animate();
 		</script>
