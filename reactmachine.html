@@ -41,13 +41,8 @@
 			function updateState(e){
 				//console.log(e);
 				console.log(currentState);
-				if(e == ""){
-					if(currentState == "left"){
-						cube.rotation.y -= .01; 
-					}else if(currentState == "right"){
-						cube.rotation.y += .01; 
-					}
-				}else if(e instanceof KeyboardEvent){
+				console.log(cube.rotation.y);
+				if(e instanceof KeyboardEvent){
 					if(e.keyCode == '37'){
 						currentState = "left";
 						cube.rotation.y -= .01; 
@@ -56,6 +51,12 @@
 						cube.rotation.y += .01;
 					}
 
+				}else if(e == ""){
+					if(currentState == "left"){
+						cube.rotation.y -= .01; 
+					}else if(currentState == "right"){
+						cube.rotation.y += .01; 
+					}
 				}
 				/*
 				
