@@ -21,7 +21,7 @@
 
 			const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 			const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-			const cube = new THREE.Mesh( geometry, material );
+			let cube = new THREE.Mesh( geometry, material );
 			scene.add( cube );
 			camera.position.z = 5;
 
@@ -39,12 +39,13 @@
 			};
 			let currentState; 
 
-			function press37(e){
-				e.keyCode == '37';
+			function pressL(e){
+				return e.key == "ArrowLeft";
+				
 		
 			}
-			function press39(e){
-				return e.keyCode == '39';
+			function pressR(e){
+				return e.key == "ArrowRight";
 			}
 			function rotateY(c, n){
 				c.rotation.y += n; 
@@ -53,14 +54,16 @@
 
 			function updateState(e){
 				//console.log(e);
-				console.log(currentState);
-				console.log(cube.rotation.y);
+				//console.log(currentState);
+				//console.log(cube.rotation.y);
+				
+				
 				if(e instanceof KeyboardEvent){
-					if(press37(e)){
+					if(pressL(e)){
 						currentState = "left";
 						//cube.rotation.y -= .01; 
 						cube = rotateY(cube, -.01);
-					}else if(press39(e)){
+					}else if(pressR(e)){
 						currentState = "right";
 						//cube.rotation.y += .01;
 						cube = rotateY(cube, .01);
@@ -72,7 +75,7 @@
 						cube = rotateY(cube, -.01);
 					}else if(currentState == "right"){
 						//cube.rotation.y += .01; 
-						cube = rotateY(cube, -.01);
+						cube = rotateY(cube, .01);
 					}
 				}
 				
