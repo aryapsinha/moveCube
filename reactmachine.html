@@ -9,20 +9,28 @@
 	</head>
 	<body>
 		
-		<script src= "../../three.js"></script>
+		<script src= "../../three.js"></script><!--unpkg will include it remotely-->
 		<script>
 			//creating the scene 
+			
 			const scene = new THREE.Scene();
+			var scene2 = new THREE.Scene();
 			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 			const renderer = new THREE.WebGLRenderer();
 			renderer.setSize( window.innerWidth, window.innerHeight );
+			renderer.autoClear = false;
 			document.body.appendChild( renderer.domElement );
 
 			//creating the cube 
 			const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 			const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 			let cube = new THREE.Mesh( geometry, material );
+			let edges = new THREE.EdgesGeometry( geometry );
+			let line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0xff0000 } ) );
+			scene.add( line );
+			//let box = new THREE.BoxHelper( cube, 0xff0000 );
 			scene.add( cube );
+			//scene2.add(box);
 
 			camera.position.z = 5; //setting the camera 
 
@@ -39,7 +47,11 @@
 				
 				updateState(myEvent);
 				myEvent = "";
-				renderer.render(scene, camera);
+				renderer.clear();
+				renderer.render( scene, camera );
+				renderer.clearDepth();
+				renderer.render( scene2, camera );
+    
 			};
 			
 
@@ -59,6 +71,9 @@
 			}
 			function rotateY(c, n){
 				c.rotation.y += n; 
+				edges.needsUpdate = true; 
+				
+				//box.update();
 				return c; 
 			}
 			const pointOne = 0.1;
