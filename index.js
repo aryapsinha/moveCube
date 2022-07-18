@@ -8,6 +8,16 @@ function pressR(e){
         return e.key == "ArrowRight";
     }
 }
+function pressUp(e){
+    if(e instanceof KeyboardEvent){
+        return e.key == "ArrowUp";
+    }
+}
+function pressDown(e){
+    if(e instanceof KeyboardEvent){
+        return e.key == "ArrowDown";
+    }
+}
 function rotateY(c, n){
     c.rotation.y += n; 
     //edges.needsUpdate = true;
@@ -149,39 +159,6 @@ function sceneBuild() { //so this is where the thing will animate
         //the update state parts
         
 
-        //function updateState(e){
-            //testing the generated code 
-            /*
-            if (currentState ==  0 ){
-                if (!pressL(e)){
-                    cube = rotateY(cube, pointOne);
-                    currentState = 0;
-                }
-                if (pressL(e) &&
-                pressR(e)){
-                    currentState = 1;
-                }
-                if (pressL(e) &&
-                !pressR(e)){
-                    cube = rotateY(cube, negpointOne);
-                    currentState = 1;
-                }
-            }
-            else if (currentState ==  1 ){
-                if (!pressL(e) &&
-                pressR(e)){
-                    cube = rotateY(cube, pointOne);
-                    currentState = 0;
-                }
-                if (pressL(e) &&
-                pressR(e)){
-                    currentState = 1;
-                }
-                if (!pressR(e)){
-                    cube = rotateY(cube, negpointOne);
-                    currentState = 1;
-                }
-            } */
     
     animate();
 
