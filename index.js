@@ -18,6 +18,11 @@ function pressDown(e){
         return e.key == "ArrowDown";
     }
 }
+function pressSpace(e){
+    if(e instanceof KeyboardEvent){
+        return e.key == " ";
+    }
+}
 function rotateY(c, n){
     c.rotation.y += n; 
     //edges.needsUpdate = true;
