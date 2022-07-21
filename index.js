@@ -13,8 +13,11 @@ materials.fill(new THREE.MeshBasicMaterial({map: loader.load('tacoheritage.png')
 let cube = new THREE.Mesh( geometry, materials );
 scene.add( cube );
 
-
+//experimentation
+let checker = false; 
+let test; 
 function sceneBuild() { //function called when "Animate" is pressed
+        
         //create the renderer
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize( window.innerWidth/4, window.innerHeight/4 );
