@@ -14,10 +14,13 @@ let cube = new THREE.Mesh( geometry, materials );
 scene.add( cube );
 
 //experimentation
-let checker = false; 
-let test; 
+let check = true; 
+let test;
+test = !check;
 function sceneBuild() { //function called when "Animate" is pressed
         
+        check = !check;       
+        console.log(check);
         //create the renderer
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize( window.innerWidth/4, window.innerHeight/4 );
@@ -31,7 +34,13 @@ function sceneBuild() { //function called when "Animate" is pressed
             renderer.clear();
             renderer.render( scene, camera );
         } 
-    animate();
+    if(test == check){
+        animate();
+    }else{
+        cancelAnimationFrame(this.id)
+    }
+    
+    //checker = !checker;
 }
 function callSynth() {//function called when "get code" is pressed
     tslSpec = document.getElementById("specBox").value;
