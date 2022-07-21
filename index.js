@@ -133,12 +133,15 @@ function sceneBuild() { //so this is where the thing will animate
         //create the renderer
         const renderer = new THREE.WebGLRenderer();
         // document.body.appendChild( renderer.domElement );
-        renderer.setSize( window.innerWidth/4, window.innerHeight/4 ); //this changes the size of the renderer
+        
+        renderer.setSize( window.innerWidth/4, window.innerHeight/4 );
+        document.getElementById("render").appendChild( renderer.domElement );
+        //renderer.setSize( document.getElementById('synthBox').style.width, document.getElementById('synthBox').style.height ); //this changes the size of the renderer
         //*I believe renderer.setviewPort can change the positioning of the animation 
         //renderer.setViewport(0, 0, window.innerWidth/4, window.innerHeight/4);
-        console.log(document.getElementById("synthBox"))
+        //console.log(document.getElementById("synthBox"))
        // document.body.insertBefore(renderer.domElement, document.getElementById("synthBox"));
-       document.body.appendChild( renderer.domElement );
+       
         
        
         
