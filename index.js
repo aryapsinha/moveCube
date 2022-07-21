@@ -8,14 +8,8 @@ camera.lookAt(0, 0, 0);
 //creating the cube 
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 const loader = new THREE.TextureLoader();
-const materials = [
-    new THREE.MeshBasicMaterial({map: loader.load('tacoheritage.png')}),
-    new THREE.MeshBasicMaterial({map: loader.load('tacoheritage.png')}),
-    new THREE.MeshBasicMaterial({map: loader.load('tacoheritage.png')}),
-    new THREE.MeshBasicMaterial({map: loader.load('tacoheritage.png')}),
-    new THREE.MeshBasicMaterial({map: loader.load('tacoheritage.png')}),
-    new THREE.MeshBasicMaterial({map: loader.load('tacoheritage.png')}),
-    ];
+const materials = [" ", " ", " ", " ", " ", " "];
+materials.fill(new THREE.MeshBasicMaterial({map: loader.load('tacoheritage.png')}));
 let cube = new THREE.Mesh( geometry, materials );
 scene.add( cube );
 
