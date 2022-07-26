@@ -34,6 +34,14 @@ function rotateY(c, n){
     c.rotation.y += n;
     return c; 
 }
+function rotateX(c, n){
+    c.rotation.x += n;
+    return c; 
+}
+function rotateZ(c, n){
+    c.rotation.z += n;
+    return c; 
+}
 
 //constant functions
 function pointOne(){
