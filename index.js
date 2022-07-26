@@ -16,7 +16,7 @@ scene.add( cube );
 //create the renderer
 let renderer; //not initialized because it will be initialized the first time "Animate" is called 
 
-//boolean stuff 
+//boolean stuff for sceneBuild and animate
 let check = true; 
 let test;
 test = !check;
