@@ -21,6 +21,7 @@ let check = true;
 let test;
 test = !check;
 let firstClick = true; 
+let codeChange = false; 
 
 function sceneBuild() { //function called when "Animate" is pressed
         if(firstClick == true){
@@ -65,6 +66,13 @@ function callSynth() {//function called when "get code" is pressed
             script.text = temp;
             script.setAttribute("id", "synth_script");
             document.body.appendChild(script);
+            if(renderer != null && firstClick == false){
+                renderer.clear(); 
+                console.log("thsithsi");
+                codeChange = true; 
+            }
+                
+ 
           
         });
       })
