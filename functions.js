@@ -33,8 +33,8 @@ function cycleFun(cycle) {
     if (cycle <= 361 && cycle >= 360){
         cycle = 0;
     }
-    else {
-        cycle += .1;
+    else{
+        cycle += .01;
     }
     return cycle;
 }
@@ -44,7 +44,7 @@ function sinFun(sin) {
         sin = 0;
     }
     else {
-        sin -= .1;
+        sin -= .01;
     }
     return sin;
 }

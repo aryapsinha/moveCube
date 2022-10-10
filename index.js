@@ -8,9 +8,11 @@ camera.lookAt(0, 0, 0);
 //creating the cube 
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 const loader = new THREE.TextureLoader();
+const tempGeometry = new THREE.BoxGeometry( 1, 1, 1 );
 const materials = [" ", " ", " ", " ", " ", " "];
 materials.fill(new THREE.MeshBasicMaterial({map: loader.load('tacoheritage.png')}));
 let cube = new THREE.Mesh( geometry, materials );
+let backup = new THREE.Mesh(tempGeometry, materials);
 scene.add( cube );
 
 //create the renderer
@@ -62,6 +64,7 @@ function callSynth() {//function called when "get code" is pressed
     if(prevSynthesized) {
         prevSynthesized.remove();
     }
+    reset();
     tslSpec = document.getElementById("specBox").value;
     tslSpec = encodeURIComponent(tslSpec.replace(/\n/g, " "));
     targetLang = document.getElementById("targetLang").value;
@@ -81,4 +84,10 @@ function callSynth() {//function called when "get code" is pressed
         });
       })
       .catch(error => console.error(error));
+}
+
+function reset(){
+    cube.scale.set(1, 1, 1);
+    cube.position.set(0, 0, 0);
+    sin = 0; cycle = 0;
 }
