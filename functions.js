@@ -34,7 +34,7 @@ function cycleFun(cycle) {
         cycle = 0;
     }
     else{
-        cycle += .01;
+        cycle += .1;
     }
     return cycle;
 }
@@ -44,7 +44,7 @@ function sinFun(sin) {
         sin = 0;
     }
     else {
-        sin -= .01;
+        sin -= .1;
     }
     return sin;
 }
