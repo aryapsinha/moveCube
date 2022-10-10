@@ -21,7 +21,8 @@ let check = true;
 let test;
 test = !check;
 let firstClick = true; 
-let codeChange = false; 
+let codeChange = false;
+let sin, cycle;
 
 function sceneBuild() { //function called when "Animate" is pressed
         if(firstClick == true){
@@ -35,23 +36,32 @@ function sceneBuild() { //function called when "Animate" is pressed
         renderer.setSize( window.innerWidth/4, window.innerHeight/4 );
         document.getElementById("render").appendChild( renderer.domElement )
 
-        currentState = 0; 
+        currentState = 0;
+        sin = 1;
+        cycle = 1;
         function animate(){
             if(test == check){
                 requestAnimationFrame(animate);
-                updateState(myEvent);
+                let c1 = cycleFun(cycle)
+                let s1 = sinFun(sin)
+                updateState(myEvent, c1, s1);
+                cycle = c1;
+                sin = s1;
+                console.log(cycleFun(cycle));
                 myEvent = "";
                 renderer.clear();
                 renderer.render( scene, camera );
             }else{
                 renderer.clear();
             }
-            
         } 
-        animate(); 
-   
+        animate();
 }
 function callSynth() {//function called when "get code" is pressed
+    let prevSynthesized = document.getElementById("synth_script");
+    if(prevSynthesized) {
+        prevSynthesized.remove();
+    }
     tslSpec = document.getElementById("specBox").value;
     tslSpec = encodeURIComponent(tslSpec.replace(/\n/g, " "));
     targetLang = document.getElementById("targetLang").value;
@@ -61,19 +71,13 @@ function callSynth() {//function called when "get code" is pressed
           document.getElementById("codeBox").value = text;
           
             let script = document.createElement("script");
-            let temp = "function updateState(e){\n" + text + "}"
-            //gotta change this at some point!
-            script.text = temp;
+            script.text = "function updateState(e, sin, cycle){\n" + text + "}";
             script.setAttribute("id", "synth_script");
             document.body.appendChild(script);
             if(renderer != null && firstClick == false){
-                renderer.clear(); 
-                console.log("thsithsi");
+                renderer.clear();
                 codeChange = true; 
             }
-                
- 
-          
         });
       })
       .catch(error => console.error(error));

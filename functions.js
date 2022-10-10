@@ -29,6 +29,26 @@ function pressSpace(e){
     }
 }
 
+function cycleFun(cycle) {
+    if (cycle <= 361 && cycle >= 360){
+        cycle = 0;
+    }
+    else {
+        cycle += .1;
+    }
+    return cycle;
+}
+
+function sinFun(sin) {
+    if (sin === -180){
+        sin = 0;
+    }
+    else {
+        sin -= .1;
+    }
+    return sin;
+}
+
 //rotate functions 
 function rotateY(c, n){
     c.rotation.y += n;

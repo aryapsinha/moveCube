@@ -31,13 +31,11 @@
       <p>Enter a TSL spec here</p>
       <textarea class="input-xlarge" id="specBox" rows="10" spellcheck="false" style="min-width:100%">
 always assume{
-    !(pressR(e) && pressL(e))
-        
+    !(pressR(e) && pressL(e));
 }
 always guarantee{
-    pressR(e) -> ([cube <- rotateY cube pointOne()] W pressL(e)); 
-    pressL(e) -> ([cube <- rotateY cube negpointOne()] W pressR(e));
-    
+    pressR(e) -> ([cube.rotation.y <- cycle] W pressL(e));
+    pressL(e) -> ([cube.rotation.y <- sin] W pressR(e));
 }
 </textarea>
     </div>
