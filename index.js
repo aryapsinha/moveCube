@@ -49,7 +49,7 @@ function sceneBuild() { //function called when "Animate" is pressed
                 updateState(myEvent, c1, s1);
                 cycle = c1;
                 sin = s1;
-                console.log(cycleFun(cycle));
+                console.log(cycleFun(sin));
                 myEvent = "";
                 renderer.clear();
                 renderer.render( scene, camera );

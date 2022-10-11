@@ -40,7 +40,7 @@ function cycleFun(cycle) {
 }
 
 function sinFun(sin) {
-    if (sin === -180){
+    if (sin <= -180 && sin >= -181){
         sin = 0;
     }
     else {
@@ -61,6 +61,20 @@ function rotateX(c, n){
 function rotateZ(c, n){
     c.rotation.z += n;
     return c; 
+}
+
+//scale functions with limits?
+function scaleY(c, n){
+    c.scale.y += n;
+    return c
+}
+function scaleX(c, n){
+    c.scale.x += n;
+    return c
+}
+function scaleZ(c, n){
+    c.scale.z += n;
+    return c
 }
 
 //constant functions
