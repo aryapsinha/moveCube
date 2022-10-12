@@ -5,7 +5,7 @@ camera.position.z = 2;
 camera.position.set(0, 1, 2); //this makes the cube look at an angle
 camera.lookAt(0, 0, 0);
 
-//creating the cube 
+//creating the cube
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 const loader = new THREE.TextureLoader();
 const tempGeometry = new THREE.BoxGeometry( 1, 1, 1 );
@@ -13,10 +13,17 @@ const materials = [" ", " ", " ", " ", " ", " "];
 materials.fill(new THREE.MeshBasicMaterial({map: loader.load('tacoheritage.png')}));
 let cube = new THREE.Mesh( geometry, materials );
 let backup = new THREE.Mesh(tempGeometry, materials);
-scene.add( cube );
+
+
+//creating a dodecahedron
+const geometry1 = new THREE.DodecahedronGeometry(0.8, 0);
+const loader1 = new THREE.TextureLoader();
+const tempGeometry1 = new THREE.DodecahedronGeometry(0.8, 0);
+let dodecahedron = new THREE.Mesh(geometry1);
+let backup1 = new THREE.Mesh(tempGeometry1);
 
 //create the renderer
-let renderer; //not initialized because it will be initialized the first time "Animate" is called 
+let renderer;
 
 //boolean stuff for sceneBuild and animate
 let check = true; 
@@ -33,9 +40,9 @@ function sceneBuild() { //function called when "Animate" is pressed
         }
         check = !check;       
         console.log(check);
-        //create the renderer
-        
+
         renderer.setSize( window.innerWidth/4, window.innerHeight/4 );
+
         document.getElementById("render").appendChild( renderer.domElement )
 
         currentState = 0;
@@ -49,7 +56,6 @@ function sceneBuild() { //function called when "Animate" is pressed
                 updateState(myEvent, c1, s1);
                 cycle = c1;
                 sin = s1;
-                console.log(cycleFun(sin));
                 myEvent = "";
                 renderer.clear();
                 renderer.render( scene, camera );
@@ -64,10 +70,20 @@ function callSynth() {//function called when "get code" is pressed
     if(prevSynthesized) {
         prevSynthesized.remove();
     }
-    reset();
     tslSpec = document.getElementById("specBox").value;
     tslSpec = encodeURIComponent(tslSpec.replace(/\n/g, " "));
     targetLang = document.getElementById("targetLang").value;
+
+    // get the object that we are dealing with
+    if (tslSpec.includes("cube")){
+        scene.add(cube);
+        reset(cube);
+    }
+    else if (tslSpec.includes("dodecahedron")){
+        scene.add(dodecahedron);
+        reset(dodecahedron);
+    }
+
     fetch("https://graphviz-web-vvxsiayuzq-ue.a.run.app/tslsynth?tsl="+tslSpec+"&target="+targetLang)
       .then(response => {
         response.text().then(function(text) {
@@ -86,8 +102,25 @@ function callSynth() {//function called when "get code" is pressed
       .catch(error => console.error(error));
 }
 
-function reset(){
-    cube.scale.set(1, 1, 1);
-    cube.position.set(0, 0, 0);
+function zoom(obj){
+    if(obj.innerHTML=="Zoom out") {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+    else{
+        renderer.setSize(window.innerWidth/4, window.innerHeight/4);
+    }
+}
+
+function changeVal(obj){
+    if(obj.innerHTML=="Zoom out"){
+        obj.innerHTML="Zoom in";
+    }else if(obj.innerHTML=="Zoom in"){
+        obj.innerHTML="Zoom out";
+    }
+}
+
+function reset(c){
+    c.scale.set(1, 1, 1);
+    c.position.set(0, 0, 0);
     sin = 0; cycle = 0;
 }
