@@ -34,7 +34,7 @@ always assume{
     !(pressR(e) && pressL(e));
 }
 always guarantee{
-    pressR(e) -> ([cube.rotation.y <- cycle] W pressL(e));
+    pressR(e) -> ([cube.rotation.y <- saw] W pressL(e));
     pressL(e) -> ([cube.rotation.y <- sin] W pressR(e));
 }
 </textarea>

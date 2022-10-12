@@ -29,24 +29,31 @@ function pressSpace(e){
     }
 }
 
-function cycleFun(cycle) {
-    if (cycle <= 361 && cycle >= 360){
-        cycle = 0;
+function sawFun(saw) {
+    if (saw <= 1.0055 && saw >= 1){
+        saw = 0;
     }
     else{
-        cycle += .1;
+        saw += .01;
     }
-    return cycle;
+    return saw;
 }
 
-function sinFun(sin) {
-    if (sin <= -180 && sin >= -181){
-        sin = 0;
+function sinFun(sin, rev) {
+    if (sin >= 1 && sin <= 1.00555){
+        rev = true;
     }
-    else {
-        sin -= .1;
+    else if (sin <= -1 && sin >= -1.00555){
+        rev = false;
     }
-    return sin;
+
+    if (rev === true){
+        sin -= .01;
+    }
+    else if (rev === false){
+        sin += .01;
+    }
+    return [sin, rev];
 }
 
 //rotate functions 
@@ -63,7 +70,7 @@ function rotateZ(c, n){
     return c; 
 }
 
-//scale functions with limits?
+//scale/translate functions with limits?
 function scaleY(c, n){
     c.scale.y += n;
     return c
@@ -75,6 +82,22 @@ function scaleX(c, n){
 function scaleZ(c, n){
     c.scale.z += n;
     return c
+}
+
+function translateX(c, n){
+    c.position.x += n;
+    return c;
+}
+
+function translateY(c, n){
+    c.position.y += n;
+    return c;
+}
+
+function translateZ(c, n){
+    c.position.z += n;
+    return c;
+
 }
 
 //constant functions

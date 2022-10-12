@@ -1,18 +1,17 @@
 //create the scene and position the camera
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 0.1, 5 );
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 5 );
 camera.position.z = 2;
 camera.position.set(0, 1, 2); //this makes the cube look at an angle
 camera.lookAt(0, 0, 0);
 
+
 //creating the cube 
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 const loader = new THREE.TextureLoader();
-const tempGeometry = new THREE.BoxGeometry( 1, 1, 1 );
 const materials = [" ", " ", " ", " ", " ", " "];
 materials.fill(new THREE.MeshBasicMaterial({map: loader.load('tacoheritage.png')}));
 let cube = new THREE.Mesh( geometry, materials );
-let backup = new THREE.Mesh(tempGeometry, materials);
 scene.add( cube );
 
 //create the renderer
@@ -24,7 +23,7 @@ let test;
 test = !check;
 let firstClick = true; 
 let codeChange = false;
-let sin, cycle;
+let sin, saw, rev;
 
 function sceneBuild() { //function called when "Animate" is pressed
         if(firstClick == true){
@@ -35,21 +34,23 @@ function sceneBuild() { //function called when "Animate" is pressed
         console.log(check);
         //create the renderer
         
-        renderer.setSize( window.innerWidth/4, window.innerHeight/4 );
+        renderer.setSize( window.innerWidth/3, window.innerHeight/3 );
         document.getElementById("render").appendChild( renderer.domElement )
 
         currentState = 0;
-        sin = 1;
-        cycle = 1;
+        sin = 0;
+        saw = 0;
+        rev = false;
         function animate(){
             if(test == check){
                 requestAnimationFrame(animate);
-                let c1 = cycleFun(cycle)
-                let s1 = sinFun(sin)
-                updateState(myEvent, c1, s1);
-                cycle = c1;
-                sin = s1;
-                console.log(cycleFun(sin));
+                let c1 = sawFun(saw) * Math.PI;
+                let vals = sinFun(sin, rev)
+                let s1 = (vals[0]) * Math.PI;
+                rev = vals[1];
+                updateState(myEvent, s1, c1);
+                saw = c1/Math.PI;
+                sin = s1/Math.PI;
                 myEvent = "";
                 renderer.clear();
                 renderer.render( scene, camera );
@@ -74,7 +75,7 @@ function callSynth() {//function called when "get code" is pressed
           document.getElementById("codeBox").value = text;
           
             let script = document.createElement("script");
-            script.text = "function updateState(e, sin, cycle){\n" + text + "}";
+            script.text = "function updateState(e, sin, saw){\n" + text + "}";
             script.setAttribute("id", "synth_script");
             document.body.appendChild(script);
             if(renderer != null && firstClick == false){
@@ -89,5 +90,5 @@ function callSynth() {//function called when "get code" is pressed
 function reset(){
     cube.scale.set(1, 1, 1);
     cube.position.set(0, 0, 0);
-    sin = 0; cycle = 0;
+    sin = 0; saw = 0;
 }
