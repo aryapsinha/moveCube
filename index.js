@@ -48,16 +48,16 @@ function sceneBuild() { //function called when "Animate" is pressed
             if(test == check){
                 requestAnimationFrame(animate);
                 let c1 = sawFun(saw) * Math.PI;
-                let vals = sinFun(sin, rev)
-                let s1 = (vals[0]) * Math.PI;
-                rev = vals[1];
+                let vals = sinFun(sin);
+                let s1 = (vals[0]);
                 updateState(myEvent, s1, c1);
                 saw = c1/Math.PI;
-                sin = s1/Math.PI;
+                sin = vals[1];
                 myEvent = "";
                 renderer.clear();
                 renderer.render( scene, camera );
-            }else{
+            }
+            else{
                 renderer.clear();
             }
         } 

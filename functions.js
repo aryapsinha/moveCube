@@ -39,21 +39,9 @@ function sawFun(saw) {
     return saw;
 }
 
-function sinFun(sin, rev) {
-    if (sin >= 1 && sin <= 1.00555){
-        rev = true;
-    }
-    else if (sin <= -1 && sin >= -1.00555){
-        rev = false;
-    }
-
-    if (rev === true){
-        sin -= .01;
-    }
-    else if (rev === false){
-        sin += .01;
-    }
-    return [sin, rev];
+function sinFun(s) {
+    console.log(Math.sin(s))
+    return [Math.sin(s), s + .1];
 }
 
 //rotate functions 
