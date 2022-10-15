@@ -29,72 +29,15 @@ function pressSpace(e){
     }
 }
 
-function sawFun(saw) {
-    if (saw <= 1.0055 && saw >= 1){
-        saw = 0;
-    }
-    else{
-        saw += .01;
-    }
+function saw(saw) {
+    saw%=6.28319
     return saw;
 }
 
-function sinFun(s) {
-    console.log(Math.sin(s))
-    return [Math.sin(s), s + .1];
+function sin(s) {
+    return Math.sin(s)
 }
 
-//rotate functions 
-function rotateY(c, n){
-    c.rotation.y += n;
-    return c; 
-}
-function rotateX(c, n){
-    c.rotation.x += n;
-    return c; 
-}
-function rotateZ(c, n){
-    c.rotation.z += n;
-    return c; 
-}
-
-//scale/translate functions with limits?
-function scaleY(c, n){
-    c.scale.y += n;
-    return c
-}
-function scaleX(c, n){
-    c.scale.x += n;
-    return c
-}
-function scaleZ(c, n){
-    c.scale.z += n;
-    return c
-}
-
-function translateX(c, n){
-    c.position.x += n;
-    return c;
-}
-
-function translateY(c, n){
-    c.position.y += n;
-    return c;
-}
-
-function translateZ(c, n){
-    c.position.z += n;
-    return c;
-
-}
-
-//constant functions
-function pointOne(){
-    return 0.1
-}
-function negpointOne(){
-    return -0.1;
-}
 
 //error-catching functions
 document.onkeydown = function (e) {
