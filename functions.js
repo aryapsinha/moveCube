@@ -35,9 +35,16 @@ function saw(saw) {
 }
 
 function sin(s) {
-    return Math.sin(s)
+    return Math.sin(s);
 }
 
+function cos(s){
+    return Math.cos(s);
+}
+
+function tan(s){
+    return Math.tan(s);
+}
 
 //error-catching functions
 document.onkeydown = function (e) {
