@@ -23,3 +23,8 @@
     border: 1px solid black;
     z-index: -1; 
   }*/
+
+.render{
+  display: flex;
+  justify-content: center;
+}

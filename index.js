@@ -12,11 +12,20 @@ const loader = new THREE.TextureLoader();
 const materials = [" ", " ", " ", " ", " ", " "];
 materials.fill(new THREE.MeshBasicMaterial({map: loader.load('tacoheritage.png')}));
 let cube = new THREE.Mesh( geometry, materials);
-scene.add( cube );
 
+/*
 //creating a dodecahedron
 const geometry1 = new THREE.DodecahedronGeometry(0.8, 0);
-let dodecahedron = new THREE.Mesh(geometry1);
+const loader1 = new THREE.TextureLoader();
+const material = [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "];
+material.fill(new THREE.MeshBasicMaterial({map: loader1.load('tacoheritage.png'), side: THREE.DoubleSide}));
+let polygon = new THREE.Mesh(geometry1, material);
+*/
+
+//creating a sphere
+const geometry1 = new THREE.SphereGeometry( 0.7 );
+const material = new THREE.MeshBasicMaterial({map: loader.load('tacoheritage.png')});
+let sphere = new THREE.Mesh( geometry1, material );
 
 //create the renderer
 let renderer, t;
@@ -65,13 +74,21 @@ function callSynth() {
 
     // get the object that we are dealing with
     scene.clear();
-    if (tslSpec.includes("cube")){
+    if (tslSpec.includes("cube") && tslSpec.includes("sphere")){
+        scene.add(cube);
+        cube.position.set(-0.8, 0, 0);
+        resetDouble(cube);
+        scene.add(sphere);
+        sphere.position.set(0.8, 0, 0);
+        resetDouble(sphere);
+    }
+    else if (tslSpec.includes("cube")){
         scene.add(cube);
         reset(cube);
     }
-    else if (tslSpec.includes("dodecahedron")){
-        scene.add(dodecahedron);
-        reset(dodecahedron);
+    else if (tslSpec.includes("sphere")){
+        scene.add(sphere);
+        reset(sphere);
     }
 
     fetch("https://graphviz-web-vvxsiayuzq-ue.a.run.app/tslsynth?tsl="+tslSpec+"&target="+targetLang)
@@ -93,7 +110,7 @@ function callSynth() {
 }
 
 function zoom(obj){
-    if(obj.innerHTML=="Zoom out") {
+    if(obj.innerHTML=="Zoom out the animation") {
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
     else{
@@ -102,10 +119,10 @@ function zoom(obj){
 }
 
 function changeVal(obj){
-    if(obj.innerHTML=="Zoom out"){
-        obj.innerHTML="Zoom in";
-    }else if(obj.innerHTML=="Zoom in"){
-        obj.innerHTML="Zoom out";
+    if(obj.innerHTML=="Zoom out the animation"){
+        obj.innerHTML="Zoom in the animation";
+    }else if(obj.innerHTML=="Zoom in the animation"){
+        obj.innerHTML="Zoom out the animation";
     }
 }
 
@@ -113,4 +130,15 @@ function reset(c){
     c.scale.set(1, 1, 1);
     c.position.set(0, 0, 0);
     t = 0;
+}
+
+function resetDouble(c){
+    c.scale.set(1, 1, 1);
+    t = 0;
+    if (c == cube){
+        c.position.set(-1, 0, 0);
+    }
+    else if (c == sphere){
+        c.position.set(1, 0, 0);
+    }
 }

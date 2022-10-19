@@ -13,7 +13,7 @@
   </head>
   <body>
     
-<div class="col-lg-6 mx-auto p-3 py-md-5">
+<div class="col-lg-6 mx-auto p-2 py-md-5">
   <main>
 
     <h1>TSL API for Animation</h1>
@@ -23,11 +23,12 @@
       <option value="js">javascript</option>
     </select>
     <button type="submit" class="btn btn-primary" style = "background-color:red; border-color:red" onclick = "sceneBuild()">Animate</button>
+      <button type="submit" class="btn btn-primary" onclick="zoom(this),changeVal(this)">Zoom out the animation</button>
   </main>
 </div>
 
 <div class="row mx-auto">
-    <div class="col-3 offset-1">
+    <div class="col-3 offset-3">
       <p>Enter a TSL spec here</p>
       <textarea class="input-xlarge" id="specBox" rows="10" spellcheck="false" style="min-width:100%">
 always assume{
@@ -35,7 +36,7 @@ always assume{
 }
 always guarantee{
     pressR(e) -> ([cube.rotation.y <- saw t] W pressL(e));
-    pressL(e) -> ([cube.rotation.y <- sin t] W pressR(e));
+    pressL(e) -> ([sphere.rotation.y <- sin t] W pressR(e));
 }
 </textarea>
     </div>
@@ -43,13 +44,12 @@ always guarantee{
       <p>Get the code here</p>
       <textarea class="input-xlarge" id="codeBox" rows="10" spellcheck="false" style="min-width:100%"></textarea>
     </div>
-    <div class="col-4" id="synthBox">
-        
-        <p id = "render">Render the animation here</p>
-        <button type="submit" class="btn btn-primary" onclick="zoom(this),changeVal(this)">Zoom out</button>
-      </div>
-  </div>
-  
+
+</div>
+
+<div class="render">
+    <p id = "render">Render the animation here</p>
+</div>
   
   </body>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
