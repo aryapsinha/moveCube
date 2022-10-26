@@ -5,7 +5,6 @@ camera.position.z = 2;
 camera.position.set(0, 1, 2); //this makes the cube look at an angle
 camera.lookAt(0, 0, 0);
 
-
 //creating the cube
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 const loader = new THREE.TextureLoader();
@@ -29,6 +28,7 @@ let sphere = new THREE.Mesh( geometry1, material );
 
 //create the renderer
 let renderer, t;
+let count = 0;
 
 //boolean stuff for sceneBuild and animate
 let check = true; 
@@ -130,11 +130,13 @@ function reset(c){
     c.scale.set(1, 1, 1);
     c.position.set(0, 0, 0);
     t = 0;
+    count = 0;
 }
 
 function resetDouble(c){
     c.scale.set(1, 1, 1);
     t = 0;
+    count = 0;
     if (c == cube){
         c.position.set(-1, 0, 0);
     }
