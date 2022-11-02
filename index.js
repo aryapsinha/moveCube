@@ -6,7 +6,7 @@ camera.position.set(2, 3, 2); //this makes the cube look at an angle
 camera.lookAt(2, 2, 0);
 
 //some colors
-const white = new THREE.Color( 0xffffff );
+const white = new THREE.Color(0xffffff);
 const blue = new THREE.Color(0x0000ff);
 const red = new THREE.Color(0xff0000);
 const yellow = new THREE.Color(0xffff00);
