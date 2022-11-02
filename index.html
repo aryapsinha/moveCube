@@ -39,8 +39,17 @@ always assume{
     !(pressR(e) && pressL(e));
 }
 always guarantee{
-    pressR(e) -> ([cube.rotation.y <- saw t] W pressL(e));
-    pressL(e) -> ([sphere.rotation.y <- sin t] W pressR(e));
+    [cubeColor <- red];
+    [polyColor <- blue];
+
+    [cube.rotation.y <- saw count];
+    [polygon.rotation.y <- saw count];
+
+    pressR(e) -> ([count <- count + 0.1] W pressL(e));
+    pressL(e) -> ([count <- count - 0.1] W pressR(e));
+
+    [cube.position.x <- 1];
+    [polygon.position.x <- 3];
 }
 </textarea>
     </div>

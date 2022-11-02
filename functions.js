@@ -15,6 +15,10 @@ function mult(e1, e2){
     return e1 * e2;
 }
 
+function eq(e1, e2){
+    return e1 === e2;
+}
+
 //key functions
 function pressL(e){
     if(e instanceof KeyboardEvent){
@@ -42,13 +46,14 @@ function pressSpace(e){
     }
 }
 
+//primitives
 function saw(saw) {
     saw%=6.28319
-    return saw;
+    return saw + 2;
 }
 
 function sin(s) {
-    return Math.sin(s);
+    return Math.sin(s) + 2;
 }
 
 //error-catching functions
