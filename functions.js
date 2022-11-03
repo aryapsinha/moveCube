@@ -57,7 +57,7 @@ function sin(s) {
 }
 
 function color(r, g, b){
-    return new THREE.Color('rgb('+ r + ',' + g + ',' + b + ')');
+    return new THREE.Color('rgb('+ Math.floor(r) + ',' + Math.floor(g) + ',' + Math.floor(b) + ')');
 }
 
 //error-catching functions
