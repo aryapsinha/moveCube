@@ -39,14 +39,14 @@ always assume{
     !(pressR(e) && pressL(e));
 }
 always guarantee{
-    [cubeColor <- red];
-    [polyColor <- blue];
+    pressR(e) -> ([count <- count + 0.1] W pressL(e));
+    pressL(e) -> ([count <- count - 0.1] W pressR(e));
 
     [cube.rotation.y <- saw count];
     [polygon.rotation.y <- saw count];
 
-    pressR(e) -> ([count <- count + 0.1] W pressL(e));
-    pressL(e) -> ([count <- count - 0.1] W pressR(e));
+    [cubeColor <- color 255 0 0];
+    [polyColor <- color 0 0 255];
 
     [cube.position.x <- 1];
     [polygon.position.x <- 3];

@@ -56,6 +56,10 @@ function sin(s) {
     return Math.sin(s) + 2;
 }
 
+function color(r, g, b){
+    return new THREE.Color('rgb('+ r + ',' + g + ',' + b + ')');
+}
+
 //error-catching functions
 document.onkeydown = function (e) {
     myEvent =  e || window.event; 

@@ -32,7 +32,7 @@ const sphereMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
 let sphere = new THREE.Mesh( sphereGeometry, sphereMaterial);*/
 
 //create the renderer
-let renderer, cubeColor, polyColor, random;
+let renderer, cubeColor, polyColor, random, t;
 let count = 0;
 
 //boolean stuff for sceneBuild and animate
@@ -42,11 +42,11 @@ test = !check;
 let firstClick = true; 
 let codeChange = false;
 
-var t = 1;
-var interval = setInterval( increment, 1000);
-function increment(){
-    t = t % 360 + 1;
-}
+//var t = 1;
+//var interval = setInterval( increment, 1000);
+//function increment(){
+    //t = t % 360 + 1;
+//}
 
 function sceneBuild() { //function called when "Animate" is pressed
         if(firstClick == true){
@@ -62,7 +62,7 @@ function sceneBuild() { //function called when "Animate" is pressed
         function animate(){
             if(test == check){
                 requestAnimationFrame(animate);
-                //t += .1;
+                t += .1;
                 random = Math.random() * 0xffffff;
                 updateState(myEvent);
                 cube.material.color.set(cubeColor);
