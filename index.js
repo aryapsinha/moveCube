@@ -7,25 +7,21 @@ camera.lookAt(2, 2, 0);
 
 //creating the cube
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const loader = new THREE.TextureLoader();
 const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
 let cube = new THREE.Mesh(geometry, material);
 
 //creating a dodecahedron
 const geometry1 = new THREE.DodecahedronGeometry(0.8, 0);
-//const loader1 = new THREE.TextureLoader();
 const material1 = new THREE.MeshStandardMaterial({ color: 0xffffff });
-//material.fill(new THREE.MeshBasicMaterial({map: loader1.load('tacoheritage.png'), side: THREE.DoubleSide}));
 let polygon = new THREE.Mesh(geometry1, material1);
 
-
 //creating a sphere
-/*const sphereGeometry = new THREE.SphereGeometry( 0.7 );
+const sphereGeometry = new THREE.SphereGeometry(0.7);
 const sphereMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
-let sphere = new THREE.Mesh( sphereGeometry, sphereMaterial);*/
+let sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 
 //create the renderer
-let renderer, cubeColor, polyColor, random, t;
+let renderer, cubeColor, polyColor, sphereColor, rand, t;
 let count = 0;
 
 //boolean stuff for sceneBuild and animate
@@ -34,12 +30,6 @@ let test;
 test = !check;
 let firstClick = true; 
 let codeChange = false;
-
-//var t = 1;
-//var interval = setInterval( increment, 1000);
-//function increment(){
-    //t = t % 360 + 1;
-//}
 
 function sceneBuild() { //function called when "Animate" is pressed
         if(firstClick == true){
@@ -55,11 +45,12 @@ function sceneBuild() { //function called when "Animate" is pressed
         function animate(){
             if(test == check){
                 requestAnimationFrame(animate);
-                t += .1;
-                random = Math.random() * 0xffffff;
+                t += 1;
+                rand = Math.random();
                 updateState(myEvent);
                 cube.material.color.set(cubeColor);
                 polygon.material.color.set(polyColor);
+                sphere.material.color.set(sphereColor);
                 myEvent = "";
                 renderer.clear();
                 renderer.render( scene, camera );
@@ -77,6 +68,7 @@ function callSynth() {
     }
     reset(cube);
     reset(polygon);
+    reset(sphere);
 
     tslSpec = document.getElementById("specBox").value;
     tslSpec = encodeURIComponent(tslSpec.replace(/\n/g, " "));
@@ -92,6 +84,10 @@ function callSynth() {
     if (tslSpec.includes("polygon")){
         reset(polygon);
         scene.add(polygon);
+    }
+    if (tslSpec.includes("sphere")){
+        reset(sphere);
+        scene.add(sphere);
     }
 
     const pointLight = new THREE.PointLight(0xfffffff);
@@ -141,4 +137,5 @@ function reset(c){
     count = 2;
     cubeColor = 0xffffff;
     polyColor = 0xffffff;
+    sphereColor = 0xffffff;
 }
