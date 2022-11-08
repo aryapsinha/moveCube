@@ -47,13 +47,13 @@ function pressSpace(e){
 }
 
 //primitives
-function saw(saw) {
-    saw%=6.28319
-    return saw + 2;
+function saw(x) {
+    x%=6.28319
+    return x + 2;
 }
 
-function sin(s) {
-    return Math.sin(s) + 2;
+function sin(x) {
+    return Math.sin(x) + 2;
 }
 
 function color(r, g, b){

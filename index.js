@@ -5,13 +5,6 @@ camera.position.z = 2;
 camera.position.set(2, 3, 2); //this makes the cube look at an angle
 camera.lookAt(2, 2, 0);
 
-//some colors
-const white = new THREE.Color(0xffffff);
-const blue = new THREE.Color(0x0000ff);
-const red = new THREE.Color(0xff0000);
-const yellow = new THREE.Color(0xffff00);
-const green = new THREE.Color(0x00ff00)
-
 //creating the cube
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 const loader = new THREE.TextureLoader();
@@ -87,7 +80,7 @@ function callSynth() {
 
     tslSpec = document.getElementById("specBox").value;
     tslSpec = encodeURIComponent(tslSpec.replace(/\n/g, " "));
-    targetLang = document.getElementById("targetLang").value;
+    targetLang = "js";
 
     // get the object that we are dealing with
     scene.clear();
@@ -124,7 +117,7 @@ function callSynth() {
 }
 
 function zoom(obj){
-    if(obj.innerHTML=="Zoom out the animation") {
+    if(obj.innerHTML=="Zoom out animation") {
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
     else{
@@ -133,10 +126,10 @@ function zoom(obj){
 }
 
 function changeVal(obj){
-    if(obj.innerHTML=="Zoom out the animation"){
-        obj.innerHTML="Zoom in the animation";
-    }else if(obj.innerHTML=="Zoom in the animation"){
-        obj.innerHTML="Zoom out the animation";
+    if(obj.innerHTML=="Zoom out animation"){
+        obj.innerHTML="Zoom in animation";
+    }else if(obj.innerHTML=="Zoom in animation"){
+        obj.innerHTML="Zoom out animation";
     }
 }
 
