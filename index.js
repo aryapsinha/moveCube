@@ -31,35 +31,43 @@ test = !check;
 let firstClick = true; 
 let codeChange = false;
 
-function sceneBuild() { //function called when "Animate" is pressed
-        if(firstClick == true){
-            firstClick = !firstClick
-            renderer = new THREE.WebGLRenderer();
-        }
-        check = !check;       
-        console.log(check);
+function call(){
+    if(firstClick==true){
+        callSynth();
+        sceneBuild();
+    }
+    else{
+        callSynth();
+    }
+}
 
-        renderer.setSize( window.innerWidth/4, window.innerHeight/4 );
-        document.getElementById("render").appendChild( renderer.domElement )
-        currentState = 0;
-        function animate(){
-            if(test == check){
-                requestAnimationFrame(animate);
-                t += 1;
-                rand = Math.random();
-                updateState(myEvent);
-                cube.material.color.set(cubeColor);
-                polygon.material.color.set(polyColor);
-                sphere.material.color.set(sphereColor);
-                myEvent = "";
-                renderer.clear();
-                renderer.render( scene, camera );
-            }
-            else{
-                renderer.clear();
-            }
-        } 
-        animate();
+function sceneBuild() { //function called when "Animate" is pressed
+    firstClick = !firstClick
+    renderer = new THREE.WebGLRenderer();
+    check = !check;
+    console.log(check);
+
+    renderer.setSize( window.innerWidth/4, window.innerHeight/4 );
+    document.getElementById("render").appendChild( renderer.domElement )
+    currentState = 0;
+    function animate(){
+        if(test == check){
+            requestAnimationFrame(animate);
+            t += 1;
+            rand = Math.random();
+            updateState(myEvent);
+            cube.material.color.set(cubeColor);
+            polygon.material.color.set(polyColor);
+            sphere.material.color.set(sphereColor);
+            myEvent = "";
+            renderer.clear();
+            renderer.render( scene, camera );
+        }
+        else{
+            renderer.clear();
+        }
+    }
+    animate();
 }
 function callSynth() {
     let prevSynthesized = document.getElementById("synth_script");

@@ -16,14 +16,12 @@
 <div class="col-lg-6 mx-auto p-2 py-md-5">
   <main>
 
-    <h1>TSL API for Animation</h1> <button type="button" class="btn btn-primary" id="documentation" data-toggle="modal" data-target="#smaplemodal" data-backdrop="false">documentation</button>
-    <p class="fs-5 col-md-8">Run TSL Synthesis from your browser</p>
-    <p class="fs-5 col-md-8">Step 1) Press "Run Synthesis"</p>
-    <p class="fs-5 col-md-8">Step 2) Press "Animate"</p>    
-    <p class="fs-5 col-md-8">Step 3) Change the spec, rinse and repeat!</p>    
+    <h1>TSL API for Animation</h1> <button type="button" class="btn btn-primary" id="documentation" data-toggle="modal" data-target="#smaplemodal" data-backdrop="false">Documentation</button>
+    <p class="fs-5 col-md-8">Run TSL Synthesis from your browser:</p>
+    <p class="fs-5 col-md-8">1. Press "Run Synthesis"</p>
+    <p class="fs-5 col-md-8">2. Change the spec, rinse and repeat!</p>
 
-    <button type="submit" class="btn btn-primary" onclick="callSynth()">Run Synthesis</button>
-    <button type="submit" class="btn btn-primary" style ="background-color:red; border-color:red" onclick = "sceneBuild()">Animate</button>
+    <button type="submit" class="btn btn-primary" style ="background-color:red; border-color:red" onclick="call()">Run Synthesis</button>
       <button type="submit" class="btn btn-primary" onclick="zoom(this),changeVal(this)">Zoom out animation</button>
       <!-- The Modal -->
       <div class="modal custom-modal fade" id="smaplemodal">
