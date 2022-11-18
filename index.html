@@ -89,8 +89,8 @@ always guarantee{
     pressR(e) -> ([count <- count + 0.1] W pressL(e));
     pressL(e) -> ([count <- count - 0.1] W pressR(e));
 
-    [cube.rotation.y <- saw count];
-    [polygon.rotation.y <- saw count];
+    [cube.rotation.y <- sin (2*count)];
+    [polygon.rotation.y <- saw (0.5 * (1 + count))];
 
     [cubeColor <- color 255 0 0];
     [polyColor <- color 0 0 255];
