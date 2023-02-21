@@ -111,6 +111,9 @@ function callSynth() {
             renderer.clear();
             codeChange = true;
         }
+    })
+    .fail(function(response) {
+        document.getElementById("codeBox").value = response.responseText;
     });
 }
 
