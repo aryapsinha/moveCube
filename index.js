@@ -35,9 +35,11 @@ function call(){
     if(firstClick==true){
         callSynth();
         sceneBuild();
+        regex();
     }
     else{
         callSynth();
+        regex();
     }
 }
 
@@ -144,3 +146,43 @@ function reset(c){
     polyColor = 0xffffff;
     sphereColor = 0xffffff;
 }
+
+function regex(){
+    var userInput = document.getElementById("specBox").value;
+    var string = userInput.toString();
+    //var assumptionRE = userInput.match("/^always assume{(.*)}$/");
+    var assumptionRE = string.match(/\[.+?\]/g);
+    var sinInput = string.match(/sin\s\((.*?)\)/);
+    var sawInput = string.match(/saw\s\((.*?)\)\]/);
+    // const text = "foo bar <- baz -> qux";
+    // const cellRegex = /\[.+?\b\w+\b(?=\s*<-)|(?<=->\s*)\b\w+\b.+?\]/g;
+    var cell = string.match(/(?<=\[\w+\s*<-)\s*\w+\s*(?=[^[\]]*\])/g);
+    var input = string.match(/(?<=[{;])([^{;]*?)(?=->)(?=[^}]*?[};])/g);
+    var output = string.match(/(?<=\[)(.*?)(?=<-)/g); 
+
+    console.log(string);
+    console.log("Regular Expression Functions");
+    console.log("-------------------------------:");
+    console.log("Cell");
+    for(const Cmatch of cell){
+        console.log(Cmatch);
+    }
+    console.log("-------------------------------:");
+    console.log("Inputs:");
+    console.log(input);
+    for(const Cmatch of input){
+        console.log(Cmatch);
+    }
+    console.log("-------------------------------:");
+    console.log("Output:");
+    console.log(output);
+    for(const Cmatch of output){
+        console.log(Cmatch);
+    }
+
+
+
+
+}
+//Three lists
+//input (e), output (cube rotation y, x, etc.), cell (count) 
