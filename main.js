@@ -1,12 +1,14 @@
+import * as THREE from 'three';
+
 //create the scene and position the camera
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 5 );
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 5);
 camera.position.z = 2;
 camera.position.set(2, 3, 2); //this makes the cube look at an angle
 camera.lookAt(2, 2, 0);
 
 //creating the cube
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
 let cube = new THREE.Mesh(geometry, material);
 
@@ -25,19 +27,90 @@ let renderer, cubeColor, polyColor, sphereColor, rand, t;
 let count = 0;
 
 //boolean stuff for sceneBuild and animate
-let check = true; 
-let test;
-test = !check;
-let firstClick = true; 
+let firstClick = true;
 let codeChange = false;
+let currentState;
+var myEvent;
 
-function call(){
-    if(firstClick==true){
+let updateState = new Function();
+
+
+//tsl-mt functions
+function add(e1, e2) {
+    return e1 + e2;
+}
+
+function sub(e1, e2) {
+    return e1 - e2;
+}
+
+function mult(e1, e2) {
+    return e1 * e2;
+}
+
+function eq(e1, e2) {
+    return e1 === e2;
+}
+
+//key functions
+function pressL(e) {
+    if (e instanceof KeyboardEvent) {
+        return e.key == "ArrowLeft";
+    }
+}
+function pressR(e) {
+    if (e instanceof KeyboardEvent) {
+        return e.key == "ArrowRight";
+    }
+}
+function pressUp(e) {
+    if (e instanceof KeyboardEvent) {
+        return e.key == "ArrowUp";
+    }
+}
+function pressDown(e) {
+    if (e instanceof KeyboardEvent) {
+        return e.key == "ArrowDown";
+    }
+}
+function pressSpace(e) {
+    if (e instanceof KeyboardEvent) {
+        return e.key == " ";
+    }
+}
+
+//primitives
+function saw(x) {
+    x %= 6.28319
+    return x + 2;
+}
+
+function sin(x) {
+    return Math.sin(x) + 2;
+}
+
+function color(r, g, b) {
+    return new THREE.Color('rgb(' + Math.floor(r) + ',' + Math.floor(g) + ',' + Math.floor(b) + ')');
+}
+
+//error-catching functions
+document.onkeydown = function (e) {
+    myEvent = e || window.event;
+};
+
+
+
+
+
+document.querySelector('#run_button').addEventListener('click', call)
+
+function call() {
+    if (firstClick == true) {
         callSynth();
         sceneBuild();
         regex();
     }
-    else{
+    else {
         callSynth();
         regex();
     }
@@ -46,55 +119,48 @@ function call(){
 function sceneBuild() { //function called when "Animate" is pressed
     firstClick = !firstClick
     renderer = new THREE.WebGLRenderer();
-    check = !check;
-    console.log(check);
 
-    renderer.setSize( window.innerWidth/4, window.innerHeight/4 );
-    document.getElementById("render").appendChild( renderer.domElement )
+    renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+    document.getElementById("render").appendChild(renderer.domElement)
     currentState = 0;
-    function animate(){
-        if(test == check){
-            requestAnimationFrame(animate);
-            t += 1;
-            rand = Math.random();
-            updateState(myEvent);
-            cube.material.color.set(cubeColor);
-            polygon.material.color.set(polyColor);
-            sphere.material.color.set(sphereColor);
-            myEvent = "";
-            renderer.clear();
-            renderer.render( scene, camera );
-        }
-        else{
-            renderer.clear();
-        }
+    function animate() {
+        requestAnimationFrame(animate);
+        t += 1;
+        rand = Math.random();
+        updateState(myEvent);
+        cube.material.color.set(cubeColor);
+        polygon.material.color.set(polyColor);
+        sphere.material.color.set(sphereColor);
+        myEvent = "";
+        renderer.clear();
+        renderer.render(scene, camera);
     }
     animate();
 }
 function callSynth() {
-    let prevSynthesized = document.getElementById("synth_script");
-    if(prevSynthesized) {
+    let prevSynthesized = document.querySelector("#synth_script");
+    if (prevSynthesized) {
         prevSynthesized.remove();
     }
     reset(cube);
     reset(polygon);
     reset(sphere);
 
-    tslSpec = document.getElementById("specBox").value;
-    targetLang = "js";
+    let tslSpec = document.querySelector("#specBox").value;
+    let targetLang = "js";
 
     // get the object that we are dealing with
     scene.clear();
 
-    if (tslSpec.includes("cube")){
+    if (tslSpec.includes("cube")) {
         reset(cube);
         scene.add(cube);
     }
-    if (tslSpec.includes("polygon")){
+    if (tslSpec.includes("polygon")) {
         reset(polygon);
         scene.add(polygon);
     }
-    if (tslSpec.includes("sphere")){
+    if (tslSpec.includes("sphere")) {
         reset(sphere);
         scene.add(sphere);
     }
@@ -103,40 +169,22 @@ function callSynth() {
     pointLight.position.set(5, 5, 5);
     scene.add(pointLight);
 
-    $.post("https://graphviz-web-vvxsiayuzq-ue.a.run.app/tslsynth", {tsl: tslSpec, target: targetLang}, function(data){
+    $.post("https://graphviz-web-vvxsiayuzq-ue.a.run.app/tslsynth", { tsl: tslSpec, target: targetLang }, function (data) {
         document.getElementById("codeBox").value = data;
-        let script = document.createElement("script");
-        script.text = "function updateState(e){\n" + data + "}";
-        script.setAttribute("id", "synth_script");
-        document.body.appendChild(script);
-        if(renderer != null && firstClick == false){
+        let genCode =
+            `(function (e){\n` + data + "})";
+        updateState = eval(genCode);
+        if (renderer != null && firstClick == false) {
             renderer.clear();
             codeChange = true;
         }
     })
-    .fail(function(response) {
-        document.getElementById("codeBox").value = response.responseText;
-    });
+        .fail(function (response) {
+            document.getElementById("codeBox").value = response.responseText;
+        });
 }
 
-function zoom(obj){
-    if(obj.innerHTML=="Zoom out animation") {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-    else{
-        renderer.setSize(window.innerWidth/4, window.innerHeight/4);
-    }
-}
-
-function changeVal(obj){
-    if(obj.innerHTML=="Zoom out animation"){
-        obj.innerHTML="Zoom in animation";
-    }else if(obj.innerHTML=="Zoom in animation"){
-        obj.innerHTML="Zoom out animation";
-    }
-}
-
-function reset(c){
+function reset(c) {
     c.scale.set(1, 1, 1);
     c.position.set(2, 2, 0);
     c.rotation.set(0, 0, 0);
@@ -147,7 +195,7 @@ function reset(c){
     sphereColor = 0xffffff;
 }
 
-function regex(){
+function regex() {
     var userInput = document.getElementById("specBox").value;
     var string = userInput.toString();
     //var assumptionRE = userInput.match("/^always assume{(.*)}$/");
@@ -158,9 +206,9 @@ function regex(){
     // const cellRegex = /\[.+?\b\w+\b(?=\s*<-)|(?<=->\s*)\b\w+\b.+?\]/g;
     var cell = string.match(/(?<=\[\w+\s*<-)\s*\w+\s*(?=[^[\]]*\])/g);
     var input = string.match(/(?<=[{;])([^{;]*?)(?=->)(?=[^}]*?[};])/g);
-    var output = string.match(/(?<=\[)(.*?)(?=<-)/g); 
+    var output = string.match(/(?<=\[)(.*?)(?=<-)/g);
 
-    console.log(string);
+    /*console.log(string);
     console.log("Regular Expression Functions");
     console.log("-------------------------------:");
     console.log("Cell");
@@ -179,6 +227,7 @@ function regex(){
     for(const Cmatch of output){
         console.log(Cmatch);
     }
+    */
 
 
 
