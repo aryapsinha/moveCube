@@ -23,3 +23,38 @@
     border: 1px solid black;
     z-index: -1; 
   }*/
+
+.render{
+  display: flex;
+  justify-content: center;
+}
+
+.custom-modal{
+  /*Places modal center of the page*/
+  position: absolute;
+  top: 27%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  width: 32%;
+  height: 40%;
+  padding: 0 !important;
+  /* end */
+}
+
+.modal-body{
+  max-height: calc(200vh - 200px);
+  overflow-y: auto;
+}
+
+.modal-dialog{
+  margin: 0;
+}
+
+#documentation{
+  position: absolute;
+  top: 8%;
+  left: 75%;
+}
+
+
+
